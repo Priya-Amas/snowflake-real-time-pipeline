@@ -1,7 +1,8 @@
 import os
-from datetime import datetime
+from datetime import datetime,timezone
 import snowflake.connector
 from dotenv import load_dotenv
+import pytz
 
 load_dotenv()
 
@@ -23,6 +24,14 @@ file_name = os.path.basename(file_path)
 put_command = f"PUT file://{os.path.abspath(file_path)} @{os.getenv('SNOWSQL_STAGE')} AUTO_COMPRESS=TRUE"
 print("Uploading file to internal stage...")
 cursor.execute(put_command)
+
+# ✅ Print clean upload time in IST
+utc_now = datetime.now(timezone.utc)
+
+# Print in same format as Snowflake stage
+print("✅ File uploaded at (GMT):", utc_now.strftime("%A, %d %B %Y at %H:%M:%S %Z"))
+
+cursor.execute(f"""list @{os.getenv('SNOWSQL_STAGE')}""");
 
 # Optional: Print confirmation
 for row in cursor.fetchall():
