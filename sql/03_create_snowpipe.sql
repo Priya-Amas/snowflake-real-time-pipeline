@@ -34,5 +34,5 @@ FROM (
     FROM @insurance_db.raw_layer.insurance_stage
 )
 FILE_FORMAT = (FORMAT_NAME = insurance_db.raw_layer.csv_format, ERROR_ON_COLUMN_COUNT_MISMATCH=FALSE)
-PATTERN = '.*insurance_sample.*.csv.gz'
+PATTERN = '.*insurance_sample.*\.csv(\.gz)?'
 ON_ERROR = 'CONTINUE';
