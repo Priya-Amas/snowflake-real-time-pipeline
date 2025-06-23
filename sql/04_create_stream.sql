@@ -16,3 +16,4 @@ ON TABLE insurance_db.raw_layer.raw_insurance_transactions;
 -- WHERE METADATA$IS_DELETE = TRUE; -- to get only deleted rows
 -- Or:
 -- SELECT * FROM insurance_db.raw_layer.raw_insurance_stream ;
+
